@@ -1,0 +1,109 @@
+ELK Installation on ubuntu 24.04:
+
+
+prerequisites:
+java
+
+==========================================================
+
+steps:
+
+sudo apt update --to update the system packages
+sudo apt install apt-transport-https ----------- transport-https is package
+sudo apt install openjdk-11-jdk -y
+
+java -version
+
+update the java home path:
+
+sudo nano /etc/envinorment
+ JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64" once updated the java home source the file
+ 
+ source /etc/envinorment
+ 
+echo$JAVA_HOME
+
+wget -q0 - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyrings.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/elasticsearch-ketrings.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main"  | sudo tee /etc/apt/source.list.d/elastic-8.x.list
+
+sudo apt-get update
+
+sudo apt-get install elasticsearch
+
+sudo systemctl start elasticsearch
+sudo systemctl enable elasticsearch
+
+sudo systemctl status elasticsearch
+
+=============================
+
+configure the elasticsearch on ubuntu
+
+sudo nano /etc/elasticsearch/elasticsearch.yml
+uncomment network host and discovery.seed_hosts:
+
+update the network host: 0.0.0.0 (to bind the all available ips)
+and
+
+discovery.seed_hosts: []
+
+sudo systemctl restart elasticsearch
+
+curl -X GET "localhost:9200"(default port is 9200)
+
+======================
+
+Install Logstash on ubuntu 
+
+sudo apt-get install logstash -y
+
+sudo systemctl start logstash
+sudo systemctl enable logstash
+sudo systemctl status logstash
+
+
+==============================
+
+Install kibana on ubuntu
+
+
+sudo apt-get install kibana
+
+sudo systemctl start kibana
+sudo systemctl enable kibana
+
+sudo systemctl status kibana
+
+
+configure the kibana on ubuntu
+
+sudo nano /etc/kibana/kibana.yml
+
+uncomment the server port and server host
+change the server host: 0.0.0.0 
+
+uncomment the elasticsearch.host: 
+
+sudo systemctl restart kibana
+
+==============================================
+
+Install the Filebeat on ubuntu
+ file beat is light weight shiper to forward a cenrtalized log data
+ 
+ sudo apt-get install filebeat
+ 
+ sudo nano /etc/filebeat/filebeat.yml
+  uncomment the output logstash and comment out the elasticsearch
+ 
+ sudo filebeat modules enable system
+ 
+ sudo- filebeat setup --index-managment	-E output.logstash.enabled=false -E 'output.elasticsearch.hosts=[0.0.0.0:9200"]'
+ sudo systemctl start filebeat
+ sudo systemctl enable filebeat
+ 
+ curl -XGET "localhosts:9200/_cat/indices?v" 
+ 
+
+==============================================
