@@ -1,10 +1,10 @@
-ELK Installation ubuntu:
+ELK Installation on ubuntu 24.04:
 
 
 prerequisites:
 java
 
--------------------
+==========================================================
 
 steps:
 
