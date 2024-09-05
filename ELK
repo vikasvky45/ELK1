@@ -105,5 +105,5 @@ Install the Filebeat on ubuntu
  
  curl -XGET "localhosts:9200/_cat/indices?v" 
  
-
+mention your IP adrres with above port number in chrome u will get the dashboard and the logs
 ==============================================
