@@ -1,5 +1,24 @@
 ELK Installation on ubuntu 24.04:
 
+Elasticsearch
+Distributed RESTful search and analytics engine
+Stores and indexes data collected by other components
+Allows for complex querying and analysis of stored data
+
+Logstash
+Data processing pipeline that can transform and enrich data
+Can collect data from various sources, transform it, and forward it to Elasticsearch
+Handles real-time data ingestion and processing
+
+Kibana
+Web-based interface for interacting with Elasticsearch
+Provides visualization tools for data exploration and dashboard creation
+Allows for ad-hoc queries and saved dashboards
+
+Filebeat:
+Lightweight data shippers that can collect data from various sources
+Examples include Filebeat, Metricbeat, and Heartbeat
+Send data directly to Elasticsearch or Logstash
 
 prerequisites:
 java
@@ -90,7 +109,7 @@ sudo systemctl restart kibana
 ==============================================
 
 Install the Filebeat on ubuntu
- file beat is light weight shiper to forward a cenrtalized log data
+ file beat is light weight shipper to forward a cenrtalized log data
  
  sudo apt-get install filebeat
  
